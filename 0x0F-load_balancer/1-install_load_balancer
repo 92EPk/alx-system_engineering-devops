@@ -39,14 +39,14 @@ defaults
   timeout server 15s
   timeout http-request 10s
 
-frontend th3gr00t-tech-frontend
+frontend omran-tech-frontend
     bind *:80
-    default_backend th3gr00t-tech-backend
+    default_backend omran-tech-backend
 
-backend th3gr00t-tech-backend
+backend omran-tech-backend
     balance roundrobin
-    server 453-web-01 35.243.128.200:80 check
-    server 453-web-02 3.239.120.96:80 check
+    server 255388-web-01 54.236.46.77:80 check
+    server 255388-web-02 54.237.76.176:80 check
 "
 
 # shellcheck disable=SC2154
