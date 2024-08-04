@@ -15,7 +15,7 @@ frontend omran-tech-frontend
 	bind *:443 ssl crt /etc/haproxy/certs/th3gr00t.tech.pem
 	http-request redirect scheme https unless { ssl_fc }
 	http-request set-header X-Forwarded-Proto https
-	default_backend th3gr00t-tech-backend
+	default_backend omran-tech-backend
 
 backend omran-tech-backend
        balance roundrobin
