@@ -6,15 +6,26 @@ number of subscribers for a given subreddit
 import requests
 
 def number_of_subscribers(subreddit):
-    url = "https://www.reddit.com/r/{subreddit}/about.json"
-    headers = {'User-Agent': 'Mozilla/5.0'}
+    # Set the URL for the subreddit
+    url = f"https://www.reddit.com/r/{subreddit}/about.json"
     
-    response = requests.get(url, headers=headers)
+    # Specify a custom User-Agent to avoid ‘Too Many Requests’ errors
+    headers = {‘User-Agent’: ‘Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/58.0.3029.110 Safari/537.3’}
     
-    # Check if the subreddit is valid
-    if response.status_code == 404:
+    try:
+        # Make a GET request to the Reddit API
+        response = requests.get(url, headers=headers, allow_redirects=False)
+        
+        # If the subreddit does not exist, a 404 status code will be returned
+        if response.status_code == 404:
+            return 0
+        
+        # If the request was successful, parse the JSON response
+        data = response.json()
+        
+        # Return the number of subscribers
+        return data[‘data’][‘subscribers’]
+    
+    except Exception as e:
+        # In case of any other exceptions, return 0
         return 0
-    
-    # If valid, extract the number of subscribers
-    data = response.json()
-    return data['data']['subscribers']
