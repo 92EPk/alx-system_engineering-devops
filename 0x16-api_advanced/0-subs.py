@@ -22,8 +22,7 @@ def number_of_subscribers(subreddit):
     url = '{}{}/about.json'.format(base_url, subreddit)
     headers = {
         'User-Agent':
-        'Mozilla/5.0 (Windows; U; Windows NT 5.1; de; rv:1.9.2.3) \
-        Gecko/20100401 Firefox/3.6.3 (FM Scene 4.6.1)'
+        'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_7_4) AppleWebKit/537.13 (KHTML, like Gecko) Chrome/24.0.1290.1 Safari/537.13'
     }
     results = requests.get(
         url,
