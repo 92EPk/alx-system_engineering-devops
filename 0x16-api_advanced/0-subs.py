@@ -21,7 +21,7 @@ def number_of_subscribers(subreddit, retries=5, timeout=10):
         try:
             # Make the request to the Reddit API
             response = requests.get(url, headers=headers, timeout=timeout)
-            # Check if the subreddit is valid by inspecting the response status code
+# Check if the subreddit is valid by inspecting the response status code
             if response.status_code == 404:
                 return 0  # Invalid subreddit
 
