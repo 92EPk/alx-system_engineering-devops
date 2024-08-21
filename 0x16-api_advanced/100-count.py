@@ -22,13 +22,14 @@ def count_words(subreddit, word_list):
         # Make the request to the Reddit API
         response = requests.get(url, headers=headers)
 
-        # Check if the subreddit is valid by inspecting the response status code
+        # Check if the subreddit is valid
         if response.status_code == 404:
             return  # Invalid subreddit
 
         # Check if the response was successful
         if response.status_code != 200:
-            print(f"Failed to retrieve hot posts. Status code: {response.status_code}")
+            print(f"Failed to retrieve hot posts. \
+            Status code: {response.status_code}")
             return
 
         # Parse the JSON response
@@ -57,7 +58,6 @@ def fetch_hot_posts(data, subreddit, headers, hot_list=None):
 
     # Recursively fetch the next page of hot posts
     if after:
-        # Construct the URL for the next page
         url = f"https://www.reddit.com/r/{subreddit}/hot.json?limit=100&after={after}"
 
         # Make the request to the Reddit API
