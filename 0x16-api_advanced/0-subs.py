@@ -12,14 +12,14 @@ def number_of_subscribers(subreddit, retries=5, timeout=10):
     url = f"https://www.reddit.com/r/{subreddit}/about.json"
     # Set a new User-Agent to avoid Too Many Requests errors
     headers = {
-        "User-Agent": "Mozilla/5.0 (iPhone; CPU iPhone OS 13_2_3 like Mac OS X) AppleWebKit/605.1.15 \(KHTML, like Gecko) Version/13.0.3 Mobile/15E148 Safari/604.1"
+        "User-Agent": "Mozilla/5.0 (iPhone; CPU iPhone OS 13_2_3 like Mac OS X) AppleWebKit/605.1.15 \
+        (KHTML, like Gecko) Version/13.0.3 Mobile/15E148 Safari/604.1"
     }
 
     for attempt in range(retries):
         try:
             # Make the request to the Reddit API
             response = requests.get(url, headers=headers, timeout=timeout)
-
             # Check if the subreddit is valid by inspecting the response status code
             if response.status_code == 404:
                 return 0  # Invalid subreddit
@@ -27,7 +27,8 @@ def number_of_subscribers(subreddit, retries=5, timeout=10):
             # Check if the response was successful
             if response.status_code == 403:
                 print(
-                    f"Attempt {attempt + 1} failed: Access forbidden (403). Please check if the subreddit exists."
+                    f"Attempt {attempt + 1} failed: Access forbidden (403). \
+                    Please check if the subreddit exists."
                 )
                 return 0  # Handle forbidden access
 
