@@ -35,7 +35,7 @@ def number_of_subscribers(subreddit, retries=5, timeout=10):
 
             if response.status_code != 200:
                 print(
-                    f"Attempt {attempt + 1} failed with status code: {response.status_code}"
+    f"Attempt {attempt + 1} failed with status code: {response.status_code}"
                 )
                 time.sleep(2)  # Wait before retrying
                 continue  # Retry on failure
