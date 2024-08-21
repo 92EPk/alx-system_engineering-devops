@@ -12,7 +12,8 @@ def number_of_subscribers(subreddit, retries=5, timeout=10):
     url = f"https://www.reddit.com/r/{subreddit}/about.json"
     # Set a new User-Agent to avoid Too Many Requests errors
     headers = {
-        "User-Agent": "Mozilla/5.0 (iPhone; CPU iPhone OS 13_2_3 like Mac OS X) AppleWebKit/605.1.15 \
+        "User-Agent": "Mozilla/5.0 (iPhone; CPU iPhone OS 13_2_3 like Mac OS X)\
+        AppleWebKit/605.1.15 \
         (KHTML, like Gecko) Version/13.0.3 Mobile/15E148 Safari/604.1"
     }
 
