@@ -33,17 +33,17 @@ defaults
         errorfile 503 /etc/haproxy/errors/503.http
         errorfile 504 /etc/haproxy/errors/504.http
 
-frontend omran-frontend
+frontend omran-tech-frontend
         bind *:80
         mode http
         http-request redirect scheme https code 301 unless { ssl_fc }
         http-request set-header X_Forwarded-Proto http
-        default_backend omran-backend
-frontend omran-frontend-https
+        default_backend omran-tech-backend
+frontend omran-tech-frontend-https
         bind *:443 ssl crt /etc/haproxy/certs/www.omran.tech.pem
         http-request set-header X-Forwarded-Proto https
-        default_backend omran-backend
-backend omran-backend
+        default_backend omran-tech-backend
+backend omran-tech-backend
        balance roundrobin
-       server 255388-web-01 54.236.46.77:80 check
-       server 255388-web-02 54.237.76.176:80 check
+       server 255388-web-01 54.227.222.93:80 check
+       server 255388-web-02 34.207.57.19:80 check
