@@ -1,50 +1,51 @@
 #!/usr/bin/python3
 """
-Script that queries subscribers on a given Reddit subreddit.
+This module contains the function number_of_subscribers
+which queries the Reddit API to return the number of subscribers
+for a given subreddit using a SOCKS5 proxy and a random User-Agent.
 """
+
+import random
 import requests
-import time
 
+# List of User-Agent strings
+USER_AGENTS = [
+    "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) "
+    "Chrome/91.0.4472.124 Safari/537.36",
+    "Mozilla/5.0 (Macintosh; Intel Mac OS X 10.15; rv:89.0) Gecko/20100101 Firefox/89.0",
+    # Add more User-Agents here
+]
 
-def number_of_subscribers(subreddit, retries=5, timeout=10):
+# Define the SOCKS proxy settings (Replace with actual SOCKS5 proxy)
+PROXIES = {
+    "http": "socks5://149.28.141.240:3129",  # Replace with your SOCKS5 proxy address and port
+}
 
-    # Construct the URL for the subreddit about endpoint
+def number_of_subscribers(subreddit):
+    """
+    Queries the Reddit API and returns the number of subscribers
+    for a given subreddit using a SOCKS5 proxy and a random User-Agent.
+    
+    Args:
+        subreddit (str): The name of the subreddit.
+        
+    Returns:
+        int: The number of subscribers, or 0 if the subreddit is invalid.
+    """
     url = f"https://www.reddit.com/r/{subreddit}/about.json"
-    # Set a new User-Agent to avoid Too Many Requests errors
+    
+    # Randomly select a User-Agent from the list
     headers = {
-        "User-Agent": "Mozilla/5.0 (iPhone; CPU iPhone OS 13_2_3 like Mac OS X)\
-        AppleWebKit/605.1.15 \
-        (KHTML, like Gecko) Version/13.0.3 Mobile/15E148 Safari/604.1"
+        "User-Agent": random.choice(USER_AGENTS)
     }
-
-    for attempt in range(retries):
-        try:
-            # Make the request to the Reddit API
-            response = requests.get(url, headers=headers, timeout=timeout)
-    # Check if the subreddit is valid by inspecting the response status code
-            if response.status_code == 404:
-                return 0  # Invalid subreddit
-
-            # Check if the response was successful
-            if response.status_code == 403:
-                print(
-                    f"Attempt {attempt + 1} failed: Access forbidden (403). \
-                    Please check if the subreddit exists."
-                )
-                return 0  # Handle forbidden access
-
-            if response.status_code != 200:
-                print(f"Attempt {attempt + 1} \
-                failed with status code: {response.status_code}")
-                time.sleep(2)  # Wait before retrying
-                continue  # Retry on failure
-
-            # Parse the JSON response
+    
+    try:
+        response = requests.get(url, headers=headers, proxies=PROXIES, allow_redirects=False)
+        
+        if response.status_code == 200:
             data = response.json()
-            return data["data"]["subscribers"]
-
-        except requests.exceptions.RequestException as e:
-            print(f"Request failed: {e}")
-            time.sleep(2)  # Wait before retrying
-
-    return 0  # Return 0 if all retries fail
+            return data.get("data", {}).get("subscribers", 0)
+        else:
+            return 0
+    except requests.RequestException:
+        return 0
