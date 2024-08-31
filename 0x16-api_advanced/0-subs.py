@@ -10,16 +10,19 @@ import requests
 
 # List of User-Agent strings
 USER_AGENTS = [
-    "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) "
-    "Chrome/91.0.4472.124 Safari/537.36",
-    "Mozilla/5.0 (Macintosh; Intel Mac OS X 10.15; rv:89.0) Gecko/20100101 Firefox/89.0",
+    "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 "
+    "(KHTML, like Gecko) Chrome/91.0.4472.124 Safari/537.36",
+    "Mozilla/5.0 (Macintosh; Intel Mac OS X 10.15; rv:89.0) "
+    "Gecko/20100101 Firefox/89.0",
     # Add more User-Agents here
 ]
 
 # Define the SOCKS proxy settings (Replace with actual SOCKS5 proxy)
 PROXIES = {
     "http": "socks5://149.28.141.240:3129",  # Replace with your SOCKS5 proxy address and port
+
 }
+
 
 def number_of_subscribers(subreddit):
     """
@@ -40,12 +43,17 @@ def number_of_subscribers(subreddit):
     }
     
     try:
-        response = requests.get(url, headers=headers, proxies=PROXIES, allow_redirects=False)
+        response = requests.get(
+            url,
+            headers=headers,
+            proxies=PROXIES,
+            allow_redirects=False
+        )
         
         if response.status_code == 200:
             data = response.json()
             return data.get("data", {}).get("subscribers", 0)
-        else:
-            return 0
+        return 0
+        
     except requests.RequestException:
         return 0
