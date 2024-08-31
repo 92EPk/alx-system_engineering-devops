@@ -19,8 +19,7 @@ USER_AGENTS = [
 
 # Define the SOCKS proxy settings (Replace with actual SOCKS5 proxy)
 PROXIES = {
-    "http": "socks5://185.38.111.1:1080",  # Replace with your SOCKS5 proxy address and port
-    "https": "socks5://185.38.111.1:1080",  # Replace with your SOCKS5 proxy address and port
+    "http": "socks5://149.28.141.240:3129",  # Replace with your SOCKS5 proxy address and port
 }
 
 
@@ -28,12 +27,15 @@ def number_of_subscribers(subreddit):
     """
     Queries the Reddit API and returns the number of subscribers
     for a given subreddit using a SOCKS5 proxy and a random User-Agent.
+    
     Args:
-        subreddit (str): The name of the subreddit.  
+        subreddit (str): The name of the subreddit.
+        
     Returns:
         int: The number of subscribers, or 0 if the subreddit is invalid.
     """
     url = f"https://www.reddit.com/r/{subreddit}/about.json"
+    
     # Randomly select a User-Agent from the list
     headers = {
         "User-Agent": random.choice(USER_AGENTS)
