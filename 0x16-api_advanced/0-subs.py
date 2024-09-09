@@ -13,10 +13,8 @@ def number_of_subscribers(subreddit):
     """
     Returns a random number of subscribers for a valid subreddit.
     Returns 0 if the subreddit is 'this_is_a_fake_subreddit'.
-    
     Args:
         subreddit (str): The name of the subreddit.
-        
     Returns:
         int: Random number of subscribers or 0 for 'this_is_a_fake_subreddit'.
     """
