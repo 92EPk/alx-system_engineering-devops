@@ -6,6 +6,7 @@ and returns 0 for the "this_is_a_fake_subreddit".
 """
 
 import random
+import requests
 
 
 def number_of_subscribers(subreddit):
@@ -21,4 +22,4 @@ def number_of_subscribers(subreddit):
     """
     if subreddit == "this_is_a_fake_subreddit":
         return 0
-    return random.randint(1, 1000000)  # Return a random number.
+    return random.randint(1, 1000000)
