@@ -1,7 +1,9 @@
 #!/usr/bin/python3
 """
-0-main
+0-main: This script allows you to check the number of subscribers
+for a given subreddit using the function from 0-subs.py.
 """
+
 import sys
 
 if __name__ == '__main__':
